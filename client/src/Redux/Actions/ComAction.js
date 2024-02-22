@@ -25,19 +25,31 @@ export const getAllComments =(id)=>async(dispatch)=>{
         })
     }
 }
-// newComment
-// {
-//     "commentaire" : "hamdoula mchet",
-//     "post" : "65c0f946a7aebb7e6bef3a4a"
-// }
+
 export const addComment=(newComment)=>async(dispatch)=>{
+    
+    const img = new FormData();
+    img.append('image', newComment.image);
+
     try {
-        
+        if(newComment.image == ''){
+            
         await axios.post('/api/commentaire/addComment', newComment, {
             headers : {
                 authorisation : localStorage.getItem('token')
             }
         })
+        }else{
+            const resImg =  await axios.post('https://api.imgbb.com/1/upload?expiration=600&key=3c643024304d938b0bf8d64fdc277d94',img)
+            const objCom = {...newComment, image : resImg.data.data.url}
+    
+            await axios.post('/api/commentaire/addComment', objCom, {
+                headers : {
+                    authorisation : localStorage.getItem('token')
+                }
+            })
+        }
+      
         dispatch(getAllComments(newComment.post))
 
     } catch (error) {
@@ -77,9 +89,21 @@ export const getOneComment=(id)=>async(dispatch)=>{
 }
 
 export const updateComment=(id, post,OneComment)=>async(dispatch)=>{
+    const img = new FormData();
+    img.append('image', OneComment.image);
     try {
+        if (OneComment.image == '') {
+            await axios.put(`/api/commentaire/updateComment/${id}`,OneComment)
+        } else {
+            const resImg =  await axios.post('https://api.imgbb.com/1/upload?expiration=600&key=3c643024304d938b0bf8d64fdc277d94',img)
+        await axios.put(`/api/commentaire/updateComment/${id}`,{...OneComment,image : resImg.data.data.url})
 
-        await axios.put(`/api/commentaire/updateComment/${id}`,OneComment)
+        }
+    
+
+        
+
+
         dispatch(getAllComments(post))
         
     } catch (error) {

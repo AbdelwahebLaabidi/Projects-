@@ -17,11 +17,14 @@ const dispatch = useDispatch()
 
 
     const [commentaire,setCommentaire] = useState(el.commentaire)
+    const [image,setImage] = useState(el.image)
+
     const OnePost = useSelector(state => state.PostReducer.OnePost)
 
 const handleUpdateComment =(e)=>{
     e.preventDefault()
-    dispatch(updateComment(el._id,OnePost._id,{commentaire}))
+    console.log(image)
+    dispatch(updateComment(el._id,OnePost._id,{commentaire,image : image== [''] ? '' : image}))
     handleClose()
 } 
 
@@ -36,6 +39,8 @@ const handleUpdateComment =(e)=>{
             <Form >
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control value={commentaire} onChange={(e)=>setCommentaire(e.target.value)}  type="text" placeholder="votre commentaire.." />
+                    <Form.Control onChange={(e)=>setImage(e.target.files[0])} type="file" multiple />
+
                 </Form.Group>
             </Form>
             <Modal.Footer>

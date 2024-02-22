@@ -52,7 +52,7 @@ const EditPost=()=>{
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Image</Form.Label>
-                <Form.Control value={image} onChange={(e)=>setImage(e.target.value)}  type="text" />
+                <Form.Control onChange={(e)=>setImage(e.target.files[0])} type="file" multiple />
             </Form.Group>
             </Form>
             <Modal.Footer>

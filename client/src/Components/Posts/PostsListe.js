@@ -16,11 +16,13 @@ const PostsListe=()=>{
 
 
 
+
     return(
         
         <div>
+
                 {
-                    Posts.map((el) => <PostCard key={el._id} el ={el} />)
+                Posts.map((el) => <PostCard key={el._id} el ={el} />)
                 }
         </div>
     )

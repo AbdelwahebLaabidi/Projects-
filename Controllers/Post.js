@@ -1,5 +1,7 @@
 const Post = require("../Models/Post")
 
+
+
 exports.AddPost =  async(req,res)=>{
     try {
         const newPost = new Post({...req.body,owner : req.user._id})
@@ -68,3 +70,15 @@ exports.AddPost =  async(req,res)=>{
         }
     }
 
+    exports.getUserPostSearch = async(req,res)=> {
+        try {
+            const {id} = req.params
+            
+            const PostSearch = await Post.find({owner : id})
+
+            res.status(200).send({status : 200, msg : "Post geted", PostSearch})
+        } catch (error) {
+            res.status(500).send({errors : [{status : 500, msg :"Could not get the post"}]})
+    
+        }
+    }

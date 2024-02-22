@@ -12,11 +12,16 @@ const AddComment=()=>{
     const OnePost = useSelector(state => state.PostReducer.OnePost)
 
     const [commentaire,setCommentaire] = useState('')
+    const [image,setImage] = useState('')
+
 
     const handelAddComment=(e)=>{
         e.preventDefault()
-        dispatch(addComment({commentaire, post : OnePost._id}))
+        
+        dispatch(addComment({commentaire,image, post : OnePost._id}))
         setCommentaire('')
+        setImage('')
+
 }
     return (
 
@@ -24,8 +29,9 @@ const AddComment=()=>{
             <Form style={{display : 'flex',alignItems: 'flex-start', justifyContent: 'center'}}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control value={commentaire} onChange={(e)=>setCommentaire(e.target.value)} style={{marginLeft: '-15px', marginRight : '720px'}} type="text" placeholder="votre commentaire.." />
+                    <Form.Control onChange={(e)=>setImage(e.target.files[0])} style={{marginLeft: '-15px', marginRight : '720px'}} type="file" multiple />
                 </Form.Group>
-                {commentaire != ''  &&   <Button onClick={(e)=> handelAddComment(e)} variant="primary">Publier</Button>}
+                {(commentaire || image) != ''  &&   <Button onClick={(e)=> handelAddComment(e)} variant="primary">Publier</Button>}
             </Form>
         </div>
     )

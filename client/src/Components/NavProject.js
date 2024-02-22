@@ -27,7 +27,6 @@ const NavProject=({isPlaying,setIsPlaying})=>{
                                     <Nav.Link as={Link} to={'/Profil'}>Profil</Nav.Link>
                                     <Nav.Link as={Link} to={'/UserListe'}>Users Listes</Nav.Link>
                                     <Nav.Link as={Link} to={'/Events'}>Events</Nav.Link>
-                                    <Nav.Link as={Link} to={'/Videos'}>Videos</Nav.Link>
                                     <Nav.Link as={Link} to={'/Photos'}>Photos</Nav.Link>
                                     <Nav.Link as={Link} to={'/Music'}>Music</Nav.Link>
                                     <Nav.Link as={Link} to={'/PostsListe'}>All Posts</Nav.Link>
@@ -37,7 +36,6 @@ const NavProject=({isPlaying,setIsPlaying})=>{
                                     <>
                                     <Nav.Link as={Link} to={'/Profil'}>Profil</Nav.Link>      
                                     <Nav.Link as={Link} to={'/Events'}>Events</Nav.Link>
-                                    <Nav.Link as={Link} to={'/Videos'}>Videos</Nav.Link>
                                     <Nav.Link as={Link} to={'/Photos'}>Photos</Nav.Link>
                                     <Nav.Link as={Link} to={'/Music'}>Music</Nav.Link>                         
                                     <Nav.Link as={Link} to={'/PostsListe'}>All Posts</Nav.Link>
@@ -46,13 +44,11 @@ const NavProject=({isPlaying,setIsPlaying})=>{
                                     :
                                     <>
                                     <Nav.Link as={Link} to={'/Events'}>Events</Nav.Link>
-                                    <Nav.Link as={Link} to={'/Videos'}>Videos</Nav.Link>
                                     <Nav.Link as={Link} to={'/Photos'}>Photos</Nav.Link>
                                     <Nav.Link as={Link} to={'/Music'}>Music</Nav.Link>
                                     </>
                             }
                                     
-                            <button  onClick={()=>setIsPlaying(!isPlaying)}>Playlist</button>
                         </Nav>
                         
                         <Nav>

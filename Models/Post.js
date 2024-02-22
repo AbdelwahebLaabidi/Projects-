@@ -4,15 +4,14 @@ const PostSchema= new mongoose.Schema({
 
     titre : String,
     description : String,
-    image : String,
-    video : String,
+    image : Array,
     time : { type: JSON, default:  new Date().toJSON() },
     owner : {
         type : mongoose.Types.ObjectId,
-        ref : "UserProject"
+        ref : "UserProjects"
     }
 
 
 })
 
-module.exports = mongoose.model('post', PostSchema)
+module.exports = mongoose.model('posts', PostSchema)

@@ -5,7 +5,10 @@ import UserCard from "./UserCard"
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 
+
 const UserListe=()=>{
+
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -19,17 +22,23 @@ const UserListe=()=>{
 
 
 
-
-
     return(
+        <div>
 
-        <div className="UserCard">
-                {
-                    AllUser.map((el)=><UserCard el = {el} />)
-                }
+                <div className="UserCard">
+
+                        {
+                        AllUser.map((el,i)=><UserCard key={i} el = {el} />)
+                        }
+
+
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <Button onClick={()=>navigate('/')} variant="dark">Home</Button>
-
-
         </div>
     )
 }

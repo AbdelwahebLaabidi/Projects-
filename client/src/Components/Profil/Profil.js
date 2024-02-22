@@ -35,11 +35,13 @@ const Profil=()=>{
     }
 
     const [titre, setTitre] = useState('')
+    const [image, setImage] = useState('')
 
     const handleAdd =(e)=>{
         e.preventDefault()
-        dispatch(addPost({titre},location))
+        dispatch(addPost({titre,image},location))
         setTitre('')
+        setImage('')
     }
 
     return(
@@ -47,22 +49,30 @@ const Profil=()=>{
             {
             User &&    
             <>
-            <h1>{User.firstName} {User.lastName} </h1>
-            <img src='https://www.ulc.org/assets/ulc/blog/scaled/an-image-of-a-religious-belief-of-the-afterlife.jpg' alt='not found'/>
-            <Button onClick={()=>{dispatch(editProfil(),navigate(`/EditProfil/${User._id}`))}} variant="primary">Edit Profil</Button>
-            
-            <Button onClick= {handleShow} variant="danger">Delete</Button>
-            <Button onClick={()=>navigate('/')} variant="dark">Home</Button>
+            <div className='profil'>
+                <div>
+                <h1 >{User.firstName} {User.lastName} </h1>
+                <br/>
+                <br/>
+                <img style={{ borderRadius: "50%", width: "100%" , maxWidth: "300px"}} src={User.image} alt='not found'/>
+                </div>
+                <div className='butt'>
+                <Button onClick={()=>{dispatch(editProfil(),navigate(`/EditProfil/${User._id}`))}} variant="primary">Edit Profil</Button>
+                <Button onClick= {handleShow} variant="danger">Delete</Button>
+                </div>
+            </div>  
+                <br/>
+            <div className='Pinput'>
+            <Form.Group controlId="formFileMultiple" className="mb-33">
+                <div>
+                <input onChange={(e)=>setTitre(e.target.value)} type="text" className="form-control" placeholder="Que voulez vous dire ?" />
+                <Form.Control onChange={(e)=>setImage(e.target.files)} type="file" multiple />
+                </div>
+                <Button  onClick={(e)=> handleAdd(e)} className='theme-btn' style={{padding : "5px 35px"}}>Post</Button>
 
-
-            <>
-            <Form.Group controlId="formFileMultiple" className="mb-3">
-                <Form.Control value={titre} onChange={(e)=>setTitre(e.target.value)} type="text"  placeholder="Que voulez-vous dire ?" />
-                <Form.Control type="file" multiple />
             </Form.Group>
 
-            <Button onClick={(e)=>titre != ''  &&  handleAdd(e)} variant="success">Add</Button>
-            </>
+            </div>
 
             
             {
@@ -79,6 +89,11 @@ const Profil=()=>{
                 </Modal.Footer>
             </Modal>
             </>}
+            <br/>
+            <br/>
+            <br/>
+            <Button onClick={()=>navigate('/')} variant="dark">Home</Button>
+
         </div>
         
     )

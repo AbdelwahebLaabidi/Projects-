@@ -26,12 +26,18 @@ const UserCard=({el})=>{
 
         <div>
             <Card style={{ width: '18rem', marginTop : '20px' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Img variant="top" style={{width :"100%", maxHeight : "300px"}} src={el.image} />
                 <Card.Body>
                     <Card.Title>{el.firstName} {el.lastName}</Card.Title>
                     <Card.Text>{el.email}</Card.Text>
+                    <div style={{display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                    <div style={{paddingRight : '10px'}} >
                     <Button as={Link} to={`/UserProfil/${el._id}`} variant="secondary">View</Button>
+                    </div>
+                    <div>
                     <Button onClick= {handleShow} variant="danger">Delete User</Button>
+                    </div>
+                    </div>
                 </Card.Body>
             </Card>
 

@@ -112,8 +112,13 @@ export const deleteProfil=(id,navigate)=>async(dispatch)=>{
 
 
 export const updateProfil =(id,updateCoord ,navigate)=>async(dispatch)=>{
+    const img = new FormData();
+    img.append('image', updateCoord.image);
+
     try {
-        await axios.put(`/api/authProject/updateProfil/${id}`,updateCoord)
+        const resImg =  await axios.post('https://api.imgbb.com/1/upload?expiration=600&key=3c643024304d938b0bf8d64fdc277d94',img)
+
+        await axios.put(`/api/authProject/updateProfil/${id}`,{...updateCoord,image : resImg.data.data.url})
 
         navigate('/Profil')
     
@@ -171,3 +176,4 @@ export const getAllUsers=()=>async(dispatch)=>{
     }
 
 
+    
